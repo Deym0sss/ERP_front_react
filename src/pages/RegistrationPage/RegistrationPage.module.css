@@ -1,0 +1,18 @@
+.registerForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10%;
+}
+.form__btns {
+  display: flex;
+  flex-direction: row;
+  width: 350px;
+  justify-content: space-around;
+}
+.form__inputs {
+  display: flex;
+  flex-direction: row;
+}

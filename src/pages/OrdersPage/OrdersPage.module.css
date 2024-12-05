@@ -1,0 +1,16 @@
+.btnContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn {
+  margin: 20px 20px;
+  border: 1px solid #0a6bb1;
+  background-color: #0d99ff;
+  font-family: "Poppins";
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn:hover {
+  border: 1px solid white;
+  color: white;
+}

@@ -1,0 +1,49 @@
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 10%;
+}
+
+.locations {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5%;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.card {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #0d99ff;
+  background-color: #0d99ff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.cardTitle {
+  width: 100%;
+  font-family: "Poppins";
+  background-color: #0d99ff;
+  color: white;
+  text-align: center;
+  font-size: 36px;
+}
+
+.create-location-card {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #0d99ff;
+  background-color: #0d99ff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  text-align: center;
+}
