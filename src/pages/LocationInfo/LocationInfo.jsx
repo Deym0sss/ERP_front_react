@@ -68,7 +68,7 @@ const LocationInfo = () => {
       .then((response) => {
         const locationData = response.data.locations[0];
         setLocationInfo(locationData);
-        getLogo(locationData); // Передача данных в getLogo сразу после установки
+        getLogo(locationData);
       });
   };
 

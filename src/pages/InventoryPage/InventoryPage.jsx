@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./InventoryPage.module.css";
 
-// Компонент редактируемой ячейки
 const EditableCell = ({
   editing,
   dataIndex,
@@ -14,7 +13,7 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = <Input />; // Все инпуты теперь текстовые (строчные)
+  const inputNode = <Input />;
   return (
     <td {...restProps}>
       {editing ? (
@@ -44,10 +43,8 @@ const App = () => {
   const [dataSource, setDataSource] = useState([]);
   const [editingKey, setEditingKey] = useState("");
 
-  // Проверяем, редактируется ли строка
   const isEditing = (record) => record.key === editingKey;
 
-  // Редактирование строки
   const edit = (record) => {
     form.setFieldsValue({
       title: "",
@@ -59,12 +56,10 @@ const App = () => {
     setEditingKey(record.key);
   };
 
-  // Отмена редактирования
   const cancel = () => {
     setEditingKey("");
   };
 
-  // Сохранение данных после редактирования
   const save = async (key) => {
     try {
       const row = await form.validateFields();
@@ -88,7 +83,6 @@ const App = () => {
     }
   };
 
-  // Определение колонок
   const columns = [
     {
       title: "Title",
@@ -107,7 +101,7 @@ const App = () => {
       dataIndex: "value",
       key: "value",
       width: "20%",
-      editable: true, // Столбец "Amount" редактируемый
+      editable: true,
     },
     {
       title: "Price",
@@ -146,7 +140,6 @@ const App = () => {
     },
   ];
 
-  // Мерджим редактируемые колонки
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
@@ -155,7 +148,7 @@ const App = () => {
       ...col,
       onCell: (record) => ({
         record,
-        inputType: "text", // Все ячейки редактируем через Input (строчный)
+        inputType: "text",
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
