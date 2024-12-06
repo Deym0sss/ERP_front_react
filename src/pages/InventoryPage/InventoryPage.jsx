@@ -188,6 +188,7 @@ const App = () => {
     <div>
       <Form form={form} component={false}>
         <Table
+          S
           components={{
             body: {
               cell: EditableCell,
