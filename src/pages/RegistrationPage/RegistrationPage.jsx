@@ -42,7 +42,7 @@ const RegistrationPage = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <label>Email:</label>
+        <label className={styles.formlabel}>Email:</label>
         <Form.Item
           className={styles.form__inputs}
           name="email"
@@ -55,7 +55,7 @@ const RegistrationPage = () => {
         >
           <Input style={{ width: "350px" }} />
         </Form.Item>
-        <label>Password:</label>
+        <label className={styles.formlabel}>Password:</label>
         <Form.Item
           className={styles.form__inputs}
           name="password"
@@ -68,7 +68,7 @@ const RegistrationPage = () => {
         >
           <Input.Password style={{ width: "350px" }} />
         </Form.Item>
-        <label>Name:</label>
+        <label className={styles.formlabel}>Name:</label>
         <Form.Item
           className={styles.form__inputs}
           name="name"
@@ -81,7 +81,7 @@ const RegistrationPage = () => {
         >
           <Input style={{ width: "350px" }} />
         </Form.Item>
-        <label>Surname:</label>
+        <label className={styles.formlabel}>Surname:</label>
         <Form.Item
           className={styles.form__inputs}
           name="surname"
@@ -94,7 +94,7 @@ const RegistrationPage = () => {
         >
           <Input style={{ width: "350px" }} />
         </Form.Item>
-        <label>Phone:</label>
+        <label className={styles.formlabel}>Phone:</label>
         <Form.Item
           className={styles.form__inputs}
           name="phone"

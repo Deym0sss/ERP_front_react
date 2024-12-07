@@ -91,7 +91,7 @@ const CreateLocation = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
-            <label>Title:</label>
+            <label className={styles.formlabel}>Title:</label>
             <Form.Item
               className={styles.form__inputs}
               name="title"
@@ -104,11 +104,11 @@ const CreateLocation = () => {
             >
               <Input style={{ width: "350px" }} />
             </Form.Item>
-            <label>Description:</label>
+            <label className={styles.formlabel}>Description:</label>
             <Form.Item className={styles.form__inputs} name="description">
               <Input style={{ width: "350px" }} />
             </Form.Item>
-            <label>Address:</label>
+            <label className={styles.formlabel}>Address:</label>
             <Form.Item
               className={styles.form__inputs}
               name="address"
@@ -121,7 +121,7 @@ const CreateLocation = () => {
             >
               <Input style={{ width: "350px" }} />
             </Form.Item>
-            <label>Staff:</label>
+            <label className={styles.formlabel}>Staff:</label>
             <Form.Item
               className={styles.form__inputs}
               name="Staff"
@@ -140,7 +140,7 @@ const CreateLocation = () => {
                 style={{ width: "350px" }}
               />
             </Form.Item>
-            <label>City:</label>
+            <label className={styles.formlabel}>City:</label>
             <Form.Item
               className={styles.form__inputs}
               name="city"
@@ -153,7 +153,7 @@ const CreateLocation = () => {
             >
               <Input style={{ width: "350px" }} />
             </Form.Item>
-            <label>Country:</label>
+            <label className={styles.formlabel}>Country:</label>
             <Form.Item
               className={styles.form__inputs}
               name="country"
@@ -168,7 +168,7 @@ const CreateLocation = () => {
             </Form.Item>
             <div className={styles.upload}>
               <div className={styles.upload__label}>
-                <label>
+                <label className={styles.formlabel}>
                   Choose logo
                   <input
                     className={styles.upload__input}
@@ -179,13 +179,15 @@ const CreateLocation = () => {
               </div>
 
               <Button className={styles.upload__btn} onClick={uploadLogo}>
-                Upload logo
+                <p className={styles.formlabel}>Upload logo</p>
               </Button>
             </div>
             <div className={styles.form__btns}>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
-                  <p>Submit</p>
+                  <p Upload logo>
+                    Submit
+                  </p>
                 </Button>
               </Form.Item>
             </div>

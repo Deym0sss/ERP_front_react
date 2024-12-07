@@ -3,6 +3,7 @@ import { Button, Form, Input, Popconfirm, Table, Typography } from "antd";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./InventoryPage.module.css";
+import Header from "../../components/Header";
 
 const EditableCell = ({
   editing,
@@ -186,6 +187,7 @@ const App = () => {
 
   return (
     <div>
+      <Header />
       <Form form={form} component={false}>
         <Table
           S

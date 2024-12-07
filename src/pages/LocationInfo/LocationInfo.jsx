@@ -133,6 +133,11 @@ const LocationInfo = () => {
         console.error(error);
       });
   };
+  const deleteLocation = async () => {
+    axios.delete(`http://localhost:5000/location/${locationId}`).then(() => {
+      navigate(`/home`);
+    });
+  };
   const onOpenAsset = (asset) => {
     navigate(`/asset/${asset._id}`);
   };
@@ -201,31 +206,46 @@ const LocationInfo = () => {
       <div className={styles.table}>
         <Table dataSource={dataSource} columns={columns}></Table>
       </div>
-
-      <div className={styles.location__btns}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
         <div>
           <Button
-            className={styles.location__btns__element}
-            onClick={goToCreateAsset}
+            className={styles.location__btns__delete}
+            onClick={deleteLocation}
           >
-            <p>Add asset</p>
+            <p>Delete location</p>
           </Button>
         </div>
-        <div>
-          <Button
-            className={styles.location__btns__element}
-            onClick={goToInventory}
-          >
-            <p>Inventorize</p>
-          </Button>
-        </div>
-        <div>
-          <Button
-            className={styles.location__btns__element}
-            onClick={goToOrdersInfo}
-          >
-            <p>Orders</p>
-          </Button>
+        <div className={styles.location__btns}>
+          <div>
+            <Button
+              className={styles.location__btns__element}
+              onClick={goToCreateAsset}
+            >
+              <p>Add asset</p>
+            </Button>
+          </div>
+          <div>
+            <Button
+              className={styles.location__btns__element}
+              onClick={goToInventory}
+            >
+              <p>Inventorize</p>
+            </Button>
+          </div>
+          <div>
+            <Button
+              className={styles.location__btns__element}
+              onClick={goToOrdersInfo}
+            >
+              <p>Orders</p>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

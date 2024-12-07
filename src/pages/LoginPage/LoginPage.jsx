@@ -40,7 +40,7 @@ const LoginPage = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <label>Email:</label>
+        <label className={styles.formlabel}>Email:</label>
         <Form.Item
           className={styles.form__inputs}
           name="email"
@@ -53,7 +53,7 @@ const LoginPage = () => {
         >
           <Input style={{ width: "350px" }} />
         </Form.Item>
-        <label>Password:</label>
+        <label className={styles.formlabel}>Password:</label>
         <Form.Item
           className={styles.form__inputs}
           name="password"
@@ -68,11 +68,11 @@ const LoginPage = () => {
         </Form.Item>
         <div className={styles.form__btns}>
           <Button type="primary" onClick={onRegister}>
-            <p>Register</p>
+            <p className={styles.formlabel}>Register</p>
           </Button>
           <Form.Item label={null}>
             <Button type="primary" htmlType="submit">
-              <p>Submit</p>
+              <p className={styles.formlabel}>Submit</p>
             </Button>
           </Form.Item>
         </div>

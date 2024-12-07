@@ -55,34 +55,31 @@ const HomePage = () => {
     if (locations.length > 0) {
       getLocationsInfo();
     }
-  }, [locations]); //
+  }, [locations]);
 
   return (
     <div className={styles.home}>
       <Header />
       <div className={styles.content}>
         <div className={styles.locations}>
-          {locationsData ? (
-            <>
-              {locationsData.map((location) => (
-                <div
-                  key={location._id}
-                  className={styles.card}
-                  onClick={() => goToLocationInfo(location._id)}
-                >
-                  <p className={styles.cardTitle}>{location.title}</p>
-                </div>
-              ))}
-              <div
-                className={`${styles.card} ${styles.createLocationCard}`}
-                onClick={createLocation}
-              >
-                <p className={styles.cardTitle}>Create location</p>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+          {/* Отображение локаций, если они есть */}
+          {locationsData?.map((location) => (
+            <div
+              key={location._id}
+              className={styles.card}
+              onClick={() => goToLocationInfo(location._id)}
+            >
+              <p className={styles.cardTitle}>{location.title}</p>
+            </div>
+          ))}
+
+          {/* Кнопка для создания новой локации */}
+          <div
+            className={`${styles.card} ${styles.createLocationCard}`}
+            onClick={createLocation}
+          >
+            <p className={styles.cardTitle}>Create location</p>
+          </div>
         </div>
       </div>
     </div>
