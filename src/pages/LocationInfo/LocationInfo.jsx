@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useMemo, useRef, useState } from "react";
 import Header from "../../components/Header";
 import styles from "./LocationInfo.module.css";
 import { Button, Space, Table } from "antd";
@@ -9,58 +9,61 @@ const LocationInfo = () => {
   const navigate = useNavigate();
   const [locationInfo, setLocationInfo] = useState(null);
   const [staffInfo, setStaffInfo] = useState(null);
-  const [logoUrl, setLogoUrl] = useState(null);
+  const logoRef = useRef(null);
   const [dataSource, setDataSource] = useState(null);
 
   const { locationId } = useParams();
 
-  const columns = [
-    {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
-      width: "25%",
-    },
-    {
-      title: "Tag",
-      dataIndex: "tag",
-      key: "tag",
-    },
-    {
-      title: "Amount",
-      dataIndex: "value",
-      key: "value",
-      width: "15%",
-    },
-    {
-      title: "Cost",
-      dataIndex: "cost",
-      key: "cost",
-    },
-    {
-      title: "Action",
-      key: "action",
-      width: "15%",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button
-            onClick={() => {
-              onOpenAsset(record);
-            }}
-          >
-            <p>Open </p>
-          </Button>
-          <Button
-            onClick={() => {
-              onDeleteAsset(record);
-            }}
-          >
-            <p>Delete</p>
-          </Button>
-        </Space>
-      ),
-    },
-  ];
+  const columns = useMemo(
+    () => [
+      {
+        title: "Title",
+        dataIndex: "title",
+        key: "title",
+        width: "25%",
+      },
+      {
+        title: "Tag",
+        dataIndex: "tag",
+        key: "tag",
+      },
+      {
+        title: "Amount",
+        dataIndex: "value",
+        key: "value",
+        width: "15%",
+      },
+      {
+        title: "Cost",
+        dataIndex: "cost",
+        key: "cost",
+      },
+      {
+        title: "Action",
+        key: "action",
+        width: "15%",
+        render: (_, record) => (
+          <Space size="middle">
+            <Button
+              onClick={() => {
+                onOpenAsset(record);
+              }}
+            >
+              <p>Open </p>
+            </Button>
+            <Button
+              onClick={() => {
+                onDeleteAsset(record);
+              }}
+            >
+              <p>Delete</p>
+            </Button>
+          </Space>
+        ),
+      },
+    ],
+    []
+  );
 
   const getLocationInfo = async () => {
     await axios
@@ -98,8 +101,8 @@ const LocationInfo = () => {
             responseType: "blob",
           }
         );
-        const logoUrl = URL.createObjectURL(response.data);
-        setLogoUrl(logoUrl);
+
+        logoRef.current = URL.createObjectURL(response.data);
       } catch (error) {
         console.error("Error fetching logo:", error);
       }
@@ -148,107 +151,119 @@ const LocationInfo = () => {
     getAssetsInfo();
   }, []);
   return (
-    <div className={styles.wrapper}>
-      <Header></Header>
-      <div className={styles.content}>
-        {locationInfo && (
-          <div className={styles.content__locationInfo}>
-            <div className={styles.content__locationInfo__element}>
-              <label>Title</label>
-              <p>{locationInfo.title}</p>
+    <>
+      {logoRef.current && (
+        <div className={styles.wrapper}>
+          <Header></Header>
+          <div className={styles.content}>
+            <div className={styles.content__locationInfo}>
+              <div className={styles.content__locationInfo__element}>
+                <label>Title</label>
+                <p>{locationInfo.title}</p>
+              </div>
+              <div className={styles.content__locationInfo__element}>
+                <label>Description</label>
+                <p>{locationInfo.description}</p>
+              </div>
+              <div className={styles.content__locationInfo__element}>
+                <label>Address</label>
+                <p>{locationInfo.address}</p>
+              </div>
+              <div className={styles.content__locationInfo__element}>
+                <label>City</label>
+                <p>{locationInfo.city}</p>
+              </div>
+              <div className={styles.content__locationInfo__element}>
+                <label>Country</label>
+                <p>{locationInfo.country}</p>
+              </div>
             </div>
-            <div className={styles.content__locationInfo__element}>
-              <label>Description</label>
-              <p>{locationInfo.description}</p>
+            <div className={styles.content__staff}>
+              <label>Workers</label>
+              <hr />
+              <div className={styles.content__staff__info}>
+                {staffInfo &&
+                  staffInfo.map((user) => (
+                    <div
+                      key={user._id}
+                      className={styles.content__staff__info__element}
+                    >
+                      {locationInfo && (
+                        <p>
+                          {user.name} {user.surname} - {user.role};
+                        </p>
+                      )}
+                    </div>
+                  ))}
+              </div>
+              <button onClick={goToStaffInfo} className={styles.staffBtn}>
+                <p>Manage</p>
+              </button>
             </div>
-            <div className={styles.content__locationInfo__element}>
-              <label>Address</label>
-              <p>{locationInfo.address}</p>
-            </div>
-            <div className={styles.content__locationInfo__element}>
-              <label>City</label>
-              <p>{locationInfo.city}</p>
-            </div>
-            <div className={styles.content__locationInfo__element}>
-              <label>Country</label>
-              <p>{locationInfo.country}</p>
-            </div>{" "}
-          </div>
-        )}
 
-        <div className={styles.content__staff}>
-          <label>Workers</label>
-          <hr />
-          <div className={styles.content__staff__info}>
-            {staffInfo &&
-              staffInfo.map((user) => (
-                <div
-                  key={user._id}
-                  className={styles.content__staff__info__element}
-                >
-                  {locationInfo && (
-                    <p>
-                      {user.name} {user.surname} - {user.role};
-                    </p>
-                  )}
-                </div>
-              ))}
+            <div>
+              <img
+                loading={lazy}
+                className={styles.content__logo}
+                src={logoRef.current}
+                alt="Logo"
+                width={300}
+                height={300}
+              />
+            </div>
           </div>
-          <button onClick={goToStaffInfo} className={styles.staffBtn}>
-            <p>Manage</p>
-          </button>
-        </div>
-
-        <div>
-          <img className={styles.content__logo} src={logoUrl} alt="Logo" />
-        </div>
-      </div>
-      <div className={styles.table}>
-        <Table dataSource={dataSource} columns={columns}></Table>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <div>
-          <Button
-            className={styles.location__btns__delete}
-            onClick={deleteLocation}
+          <div className={styles.table}>
+            <Table
+              pagination={true}
+              dataSource={dataSource}
+              columns={columns}
+            ></Table>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
           >
-            <p>Delete location</p>
-          </Button>
+            <div>
+              <Button
+                className={styles.location__btns__delete}
+                onClick={deleteLocation}
+              >
+                <p>Delete location</p>
+              </Button>
+            </div>
+            <div className={styles.location__btns}>
+              <div>
+                <Button
+                  className={styles.location__btns__element}
+                  onClick={goToCreateAsset}
+                >
+                  <p>Add asset</p>
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={styles.location__btns__element}
+                  onClick={goToInventory}
+                >
+                  <p>Inventorize</p>
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className={styles.location__btns__element}
+                  onClick={goToOrdersInfo}
+                >
+                  <p>Orders</p>
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className={styles.location__btns}>
-          <div>
-            <Button
-              className={styles.location__btns__element}
-              onClick={goToCreateAsset}
-            >
-              <p>Add asset</p>
-            </Button>
-          </div>
-          <div>
-            <Button
-              className={styles.location__btns__element}
-              onClick={goToInventory}
-            >
-              <p>Inventorize</p>
-            </Button>
-          </div>
-          <div>
-            <Button
-              className={styles.location__btns__element}
-              onClick={goToOrdersInfo}
-            >
-              <p>Orders</p>
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
