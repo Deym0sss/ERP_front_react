@@ -38,6 +38,7 @@ p {
 }
 .staffBtn {
   width: 100px;
+  height: 30px;
   margin-top: auto;
   margin-left: auto;
   border-radius: 8px;
